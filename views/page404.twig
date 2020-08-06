@@ -1,0 +1,15 @@
+{% extends 'layouts/main.twig' %}
+
+{% block title %}
+    Страница 404
+{% endblock %}
+
+{% block content %}
+<div class="t404">
+    {% if text404 %}
+       {{ text404 }}
+    {% else %}
+       Страница не существует.
+    {% endif %}
+</div>
+{% endblock %}

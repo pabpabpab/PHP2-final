@@ -1,0 +1,21 @@
+{% extends 'layouts/main.twig' %}
+
+{% block title %}
+    Вход для пользователя
+{% endblock %}
+
+{% block content %}
+    <h1>Вход для пользователя</h1>
+
+    <form method='post' action='/auth/login'>
+        <input type='email' placeholder='Ваш логин (email)' name='email' class='field'><br><br>
+        <input type='password' placeholder='Пароль' name='password' class='field'><br><br>
+        <input type='submit' class='field'>
+    </form>
+
+    <br><br><br>
+    Admin: login: <b>123123@123.ru</b> , password: <b>123123</b><br>
+    login: <b>333@333.ru</b> , password: <b>123456</b><br>
+    login: <b>456@456.ru</b> , password: <b>456456</b><br>
+    login: <b>777@777.ru</b> , password: <b>789789</b><br>
+{% endblock %}

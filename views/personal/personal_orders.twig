@@ -1,0 +1,34 @@
+{% if isAdmin %}
+    <h2>Заказы</h2>
+{% else %}
+    <h2>Мои заказы</h2>
+{% endif %}
+
+<div class='catalog_order'>
+    {% for order in paginator.getItems() %}
+        <div class='catalog_order_item'>
+            <div>
+                <a href="/personal/order?id={{ order.id }}" class='catalog_name_link'>
+                    Заказ номер {{ order.id }} на сумму {{ order.total_price }} &#8381;
+                </a>
+            </div>
+            <div class='order_status'>
+                Статус: {{ statuses[order.status]  }}
+            </div>
+        </div>
+    {% else %}
+        Нет заказов
+    {% endfor %}
+</div>
+
+{% if paginator.getUrls() | length > 1 %}
+    <div class="paginator">
+        {% for page, url in paginator.getUrls() %}
+            {% if page == paginator.pageNumber %}
+                <a href="{{ url }}" class="page_link_active">{{ page }}</a>
+            {% else %}
+                <a href="{{ url }}" class="page_link">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}

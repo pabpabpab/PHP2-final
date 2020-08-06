@@ -1,0 +1,51 @@
+<h2>Заказ номер {{ order.id }}</h2>
+<table class='cart w60p'>
+   {% for id, item in order.itemsSet %}
+      <tr>
+          <td>
+              <div class='cart_product'>
+                  <div><a href='/good/one?id={{ id }}' class='catalog_name_link'>{{ item.name }}</a></div>
+                  {% if item.main_img_name %}
+                      <a href='/good/one?id={{ id }}'>
+                          <img src='{{ imgPath }}/{{ item.img_folder }}/{{ item.main_img_name }}' class='small_img'>
+                      </a>
+                  {% endif %}
+                  <div class='catalog_price'>{{ item.price }}&#8381;</div>
+              </div>
+          </td>
+          <td>
+              {{ item.count }} шт.
+          </td>
+          <td>
+              {{ item.totalPrice }} &#8381;
+          </td>
+      </tr>
+   {% else %}
+      <tr><td>Заказ пуст.</td></tr>
+   {% endfor %}
+</table>
+
+<div class='cart w60p'>
+    <div class='totalPrice'>
+        Итого: {{ order.total_price }} &#8381;
+    </div>
+
+
+    Статус заказа: {{ statuses[order.status] }}
+    {% if isAdmin %}
+       <form method='post' action='/personal/changeOrderStatus?id={{ order.id }}'>
+          <select name='status' class='field'>
+              <option></option>
+              {% for key, value in statuses %}
+                  {% if order.status == key %}
+                      <option value={{ key }} selected>{{ value }}</option>
+                  {% else %}
+                      <option value={{ key }}>{{ value }}</option>
+                  {% endif %}
+              {% endfor %}
+          </select>
+          <input type='submit' value='Изменить' class='field'>
+       </form>
+    {% endif %}
+</div>
+

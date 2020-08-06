@@ -1,0 +1,17 @@
+{% extends 'layouts/main.twig' %}
+
+{% block title %}
+    Регистрация нового пользователя
+{% endblock %}
+
+{% block content %}
+<h1>Регистрация нового пользователя</h1>
+
+<form method='post' action='/registration/save'>
+    <input type='text' placeholder='Ваше имя' name='name' class='field'><br><br>
+    <input type='email' placeholder='Ваш email' name='email' class='field'><br><br>
+    <input type='password' placeholder='Пароль' name='password' class='field'><br><br>
+    <input type='password' placeholder='Повторите пароль' name='password2' class='field'><br><br>
+    <input type='submit' class='field'>
+</form>
+{% endblock %}

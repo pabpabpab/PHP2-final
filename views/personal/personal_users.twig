@@ -1,0 +1,34 @@
+<h2>Пользователи</h2>
+
+<div class='catalog_order'>
+    {% for user in paginator.getItems() %}
+        <div class='catalog_order_item'>
+            <div>
+                <span class='catalog_name_link'>
+                    {% if user.is_admin %}
+                        Администратор {{ user.name }} логин {{ user.login }}
+                    {% else %}
+                       Пользователь {{ user.name }} логин {{ user.login }}
+                    {% endif %}
+                </span>
+            </div>
+            <div class='order_status'>
+                Заказов: {{ user.number_of_orders  }}
+            </div>
+        </div>
+    {% else %}
+        Нет пользователей
+    {% endfor %}
+</div>
+
+{% if paginator.getUrls() | length > 1 %}
+    <div class="paginator">
+        {% for page, url in paginator.getUrls() %}
+            {% if page == paginator.pageNumber %}
+                <a href="{{ url }}" class="page_link_active">{{ page }}</a>
+            {% else %}
+                <a href="{{ url }}" class="page_link">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}

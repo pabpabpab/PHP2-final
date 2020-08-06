@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/style.css?t={{ 'now'|date('U') }}">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Магазин{% endblock %}</title>
+</head>
+<body>
+   <ul class="menu">
+      <li><a href="/" class="menu_link">Главная</a></li>
+      <li><a href="/good/all" class="menu_link">Товары</a></li>
+      <li><a href="/cart" title="{{ cartTotalPrice }}&#8381;"  class="menu_link">Корзина ({{ cartCount }})</a></li>
+      {% if user.authorized %}
+          <li class='menu_li__personal_area'>
+              <a href="/personal" class="menu_link">Личный кабинет</a>
+              <a href="/personal" class='menu__private_name_link'>{{ user.name }}</a>
+          </li>
+          <li><a href="/auth/logout" class="menu_link">Выйти</a></li>
+      {% else %}
+          <li><a href="/registration" class="menu_link">Регистрация</a></li>
+          <li><a href="/auth" class="menu_link">Войти</a></li>
+      {% endif %}
+   </ul>
+
+
+
+          {% if msg %}
+             <div class='error'>{{ msg | raw }}</div>
+          {% endif %}
+
+          {% block content %}{% endblock %}
+
+       <div class="footer"></div>
+</body>
+</html>

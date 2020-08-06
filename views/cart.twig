@@ -1,0 +1,61 @@
+{% extends 'layouts/main.twig' %}
+
+{% block title %}
+    Корзина
+{% endblock %}
+
+{% block content %}
+<h1>Корзина</h1>
+   <form method='post' action='/cart/save'>
+       <table class='cart'>
+       {% for id, good in cart.goods %}
+        <tr>
+            <td class='w310px'>
+                <div class='cart_product'>
+                    <div><a href='/good/one?id={{ id }}' class='catalog_name_link'>{{ good.name }}</a></div>
+                    {% if good.main_img_name %}
+                        <a href='/good/one?id={{ id }}'>
+                            <img src='{{ imgPath }}/{{ good.img_folder }}/{{ good.main_img_name }}' class='small_img'>
+                        </a>
+                    {% endif %}
+                    <div class='catalog_price'>{{ good.price }}&#8381;</div>
+                </div>
+            </td>
+            <td class="tar">
+                <input type='text' name='goodsCount[{{ id }}]' value='{{ good.count }}' class='cart_input'>
+            </td>
+            <td class="tar">
+                {{ good.totalPrice }}&#8381;
+            </td>
+            <td class="tar">
+                <a href='/cart/delete?id={{ id }}' class='catalog_name_link'>Удалить</a>
+            </td>
+        </tr>
+       {% else %}
+        <tr><td>Корзина пуста.</td></tr>
+       {% endfor %}
+       </table>
+
+       <div>
+        {% if cart.count %}
+            <div class='totalPrice'>
+               Итого: {{ cart.totalPrice }}&#8381;
+            </div>
+            <div class='cart_bottom'>
+
+                {% if user.authorized %}
+                    <input type='submit' name='makeOrder' value='Оформить заказ' class='order_submit'>
+                {% else %}
+                    <div class='order_invite'>
+                        <a href='/auth' class='private_menu_link'>Авторизуйтесь</a>
+                        чтобы оформить заказ.
+                    </div>
+                {% endif %}
+
+                <input type='submit' name='saveChanges' value='Сохранить изменения' class='order_submit'>
+            </div>
+        {% endif %}
+       </div>
+   </form>
+{% endblock %}
+

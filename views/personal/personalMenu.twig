@@ -1,0 +1,13 @@
+<ul class="private_menu">
+    {% if user.is_admin %}
+       <li><a href="/personal" class="private_menu_link">Админ: {{ user.name }}</a></li>
+       <li><a href="/personal/goods" class="private_menu_link">Все товары ({{ user.number_of_products }})</a></li>
+       <li><a href="/personal/addgood" class="private_menu_link">Добавить товар</a></li>
+       <li><a href="/personal/orders" class="private_menu_link">Заказы  ({{ user.number_of_orders }})</a></li>
+       <li><a href="/personal/users" class="private_menu_link">Пользователи  ({{ usersCount }})</a></li>
+    {% else %}
+       <li><a href="/personal" class="private_menu_link">{{ user.name }}</a></li>
+       <li><a href="/personal/orders" class="private_menu_link">Мои заказы  ({{ user.number_of_orders }})</a></li>
+    {% endif %}
+    <li><a href="/auth/logout" class="private_menu_link">Выход</a></li>
+</ul>

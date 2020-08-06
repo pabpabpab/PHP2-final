@@ -1,0 +1,43 @@
+{% extends 'layouts/main.twig' %}
+
+{% block title %}
+    {{ good.name }}
+{% endblock %}
+
+{% block content %}
+   <h1>{{ good.name }}</h1>
+   {% if good.images %}
+      <div class='product_img_div'>
+         {% for image in good.images %}
+             <img src='{{ imgPath }}/{{ good.img_folder }}/{{ image }}' class='small_img'>
+         {% endfor %}
+      </div>
+   {% endif %}
+   <div>
+      Цена: {{ good.price }} <br>
+      Описание: {{ good.info }} <br>
+   </div>
+
+   <a href="/cart/add?id={{ good.id }}" class="addtocart_link">Добавить в корзину ({{ goodCartCount }})</a>
+
+
+
+   <h2>Комментарии</h2>
+
+   <div class='comments'>
+      {%  for comment in comments %}
+          <div class='comment'>{{ loop.index }}. {{ comment.text }}</div>
+      {% endfor %}
+   </div>
+
+   <a name='comments'></a>
+   <h2>Добавить комментарий</h2>
+   <form method='post' action='/comment/add?id={{ good.id }}'>
+   <textarea placeholder='Комментарий' name='comment' class='field'></textarea><br><br>
+   <input type='submit' name='addcomment' class='field'>
+   </form>
+
+{% endblock %}
+
+
+

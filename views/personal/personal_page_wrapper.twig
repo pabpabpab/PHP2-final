@@ -1,0 +1,18 @@
+{% extends 'layouts/main.twig' %}
+
+{% block title %}
+    Личный кабинет
+{% endblock %}
+
+{% block content %}
+    <h1>Личный кабинет</h1>
+
+    <div class='private_content'>
+        <div class='private_column_left'>
+            {{ personalMenu | raw }}
+        </div>
+        <div class='private_column_right'>
+            {{ personalContent | raw }}
+        </div>
+    </div>
+{% endblock %}
